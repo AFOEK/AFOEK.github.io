@@ -1,6 +1,10 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/portfolio/Hero";
+import Research from "@/components/portfolio/Research";
+import Publications from "@/components/portfolio/Publications";
+import Projects from "@/components/portfolio/Projects";
+
 
 export default function Home() {
   return (
@@ -8,9 +12,9 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <section id="research" className="min-h-screen"></section>
-        <section id="publications" className="min-h-screen"></section>
-        <section id="projects" className="min-h-screen"></section>
+        <Research />
+        <Publications />
+        <Projects />
         <section id="contact" className="min-h-screen"></section>
       </main>
       <Footer />
