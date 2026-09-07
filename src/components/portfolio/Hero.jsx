@@ -1,11 +1,9 @@
 export default function Hero() {
   return (
     <section id="home" className="relative flex min-h-screen items-center overflow-hidden pt-24">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-quantum-blue/5 blur-3xl" />
-        <div className="absolute right-[12%] top-[28%] h-80 w-80 rounded-full bg-quantum-violet/5 blur-3xl" />
-        <div className="absolute bottom-[12%] left-[45%] h-64 w-64 rounded-full bg-quantum-green/5 blur-3xl" />
-      </div>
+      <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-quantum-blue/5 blur-3xl" />
+      <div className="absolute right-[12%] top-[28%] h-80 w-80 rounded-full bg-quantum-violet/5 blur-3xl" />
+      <div className="absolute bottom-[12%] left-[45%] h-64 w-64 rounded-full bg-quantum-green/5 blur-3xl" />
 
       <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div className="max-w-4xl">
