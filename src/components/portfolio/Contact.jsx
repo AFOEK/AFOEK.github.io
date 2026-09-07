@@ -32,7 +32,7 @@ const links = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-28 sm:py-36">
+    <section id="contact" className="page-section snap-start flex min-h-screen items-center py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-blue">

@@ -3,7 +3,7 @@ import PublicationItem from "@/components/portfolio/PublicationItem";
 
 export default function Publications() {
   return (
-    <section id="publications" className="py-28 sm:py-36">
+    <section id="publications" className="page-section snap-start py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-16 max-w-2xl">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-violet">02 / Publications</p>

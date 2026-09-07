@@ -4,7 +4,7 @@ import ProjectCard from "@/components/portfolio/ProjectCard";
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-28 sm:py-36">
+    <section id="projects" className="page-section snap-start py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-16 flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
           <div className="max-w-2xl">

@@ -2,7 +2,7 @@ import { researchAreas } from "@/data/research";
 
 export default function Research() {
   return (
-    <section id="research" className="py-28 sm:py-36">
+    <section id="research" className="page-section snap-start py-28 sm:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-16 max-w-2xl">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-blue">01 / Research</p>

@@ -1,27 +1,38 @@
+import { useRef } from "react";
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import BackgroundGlow from "@/components/layout/BackgroundGlow";
+import SectionNavigator from "@/components/layout/SectionNavigator";
+
 import Hero from "@/components/portfolio/Hero";
 import Research from "@/components/portfolio/Research";
 import Publications from "@/components/portfolio/Publications";
 import Projects from "@/components/portfolio/Projects";
 import Contact from "@/components/portfolio/Contact";
-import BackgroundGlow from "@/components/layout/BackgroundGlow";
+
+import { useSectionObserver } from "@/hooks/useSectionObserver";
+
+const sectionIds = ["home", "research", "publications", "projects", "contact"];
 
 export default function Home() {
+  const scrollRef = useRef(null);
+  const activeSection = useSectionObserver(scrollRef, sectionIds);
+
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+    <div className="relative h-screen overflow-hidden bg-background text-foreground">
       <BackgroundGlow />
       <Navbar />
-      <main className="relative z-10">
+      <SectionNavigator activeSection={activeSection} />
+
+      <main ref={scrollRef} className="portfolio-scroll relative z-10 h-screen overflow-y-auto">
         <Hero />
         <Research />
         <Publications />
         <Projects />
         <Contact />
-      </main>
-      <div className="relative z-10">
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }
