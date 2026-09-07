@@ -9,7 +9,7 @@ export default function Projects() {
         <div className="mb-16 flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-green">03 / Projects</p>
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Selected projects</h2>
+            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Starred projects</h2>
             <p className="mt-5 leading-7 text-white/50">Selected software and experimental systems spanning artificial intelligence, systems programming, and quantum computing.</p>
           </div>
 

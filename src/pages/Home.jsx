@@ -4,6 +4,7 @@ import Hero from "@/components/portfolio/Hero";
 import Research from "@/components/portfolio/Research";
 import Publications from "@/components/portfolio/Publications";
 import Projects from "@/components/portfolio/Projects";
+import Contact from "@/components/portfolio/Contact";
 
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
         <Research />
         <Publications />
         <Projects />
-        <section id="contact" className="min-h-screen"></section>
+        <Contact />
       </main>
       <Footer />
     </div>
