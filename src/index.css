@@ -346,7 +346,7 @@
   bottom: 5%;
   opacity: 0;
   filter: drop-shadow(0 0 12px rgba(112, 150, 200, 0.3));
-  animation: boltzmann-brain 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: boltzmann-brain 3.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes boltzmann-brain {
@@ -392,7 +392,7 @@
   background: #7096c8;
   opacity: 0;
   box-shadow: 0 0 6px rgba(112, 150, 200, 0.4);
-  animation: brain-glitch 0.65s steps(3, end) var(--delay) forwards;
+  animation: brain-glitch 1.1s steps(4, end) var(--delay) forwards;
 }
 
 @keyframes brain-glitch {
@@ -429,7 +429,7 @@
   background: rgba(154, 140, 194, 0.05);
   opacity: 0;
   filter: drop-shadow(0 0 7px rgba(154, 140, 194, 0.25));
-  animation: helium-burst 1.75s cubic-bezier(0.15, 0.8, 0.25, 1) var(--delay) forwards;
+  animation: helium-burst 3s cubic-bezier(0.15, 0.8, 0.25, 1) var(--delay) forwards;
 }
 
 .helium-orbit {

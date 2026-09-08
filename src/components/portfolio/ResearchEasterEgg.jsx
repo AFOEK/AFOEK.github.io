@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { BrainCircuit, Cpu } from "lucide-react";
+import { Brain, Cpu } from "lucide-react";
 
 const rand = (min, max) => Math.random() * (max - min) + min;
 
@@ -21,7 +21,7 @@ function BrainEffect({ run }) {
   return (
     <div key={run} className="absolute inset-0 overflow-hidden">
       <div className="boltzmann-brain">
-        <BrainCircuit className="size-20 text-quantum-blue" strokeWidth={1.1} />
+        <Brain className="size-20 text-quantum-blue" strokeWidth={1.1} />
         <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[8px] tracking-[0.2em] text-quantum-blue/40">
           STATE // FLUCTUATION
         </span>
@@ -49,9 +49,9 @@ function BrainEffect({ run }) {
 function HeliumEffect({ run }) {
   const atoms = useMemo(
     () =>
-      Array.from({ length: 18 }, (_, i) => {
+      Array.from({ length: 24 }, (_, i) => {
         const angle = Math.random() * Math.PI * 2;
-        const distance = rand(160, 380);
+        const distance = rand(160, 460);
 
         return {
           id: i,
@@ -59,7 +59,7 @@ function HeliumEffect({ run }) {
           tx: Math.cos(angle) * distance,
           ty: Math.sin(angle) * distance,
           rotation: rand(-360, 360),
-          delay: rand(0, 0.18),
+          delay: rand(0, 0.45),
           size: rand(26, 42),
         };
       }),
@@ -94,12 +94,12 @@ function HeliumEffect({ run }) {
 function ChipEffect({ run }) {
   const chips = useMemo(
     () =>
-      Array.from({ length: 28 }, (_, i) => ({
+      Array.from({ length: 32 }, (_, i) => ({
         id: i,
         left: rand(0, 95),
         size: rand(13, 34),
-        delay: rand(0, 0.75),
-        duration: rand(1.3, 2.6),
+        delay: rand(0, 1.2),
+        duration: rand(2.0, 4.5),
         rotation: rand(-180, 180),
         drift: rand(-45, 45),
       })),
