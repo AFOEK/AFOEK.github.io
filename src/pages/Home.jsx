@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BackgroundGlow from "@/components/layout/BackgroundGlow";
 import SectionNavigator from "@/components/layout/SectionNavigator";
+import DebugPrank from "@/components/layout/DebugPrank";
 
 import Hero from "@/components/portfolio/Hero";
 import Research from "@/components/portfolio/Research";
@@ -21,6 +22,7 @@ export default function Home() {
 
   return (
     <div className="relative h-dvh overflow-hidden bg-background text-foreground">
+      <DebugPrank />
       <BackgroundGlow />
       <Navbar />
       <SectionNavigator activeSection={activeSection} />
