@@ -7,33 +7,73 @@ export function useSectionObserver(containerRef, sectionIds) {
     const root = containerRef.current;
     if (!root) return;
 
-    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    let frame = null;
 
-        if (!visible.length) return;
+    const update = () => {
+      frame = null;
 
-        const id = visible[0].target.id;
-        setActiveSection(id);
+      const rootRect = root.getBoundingClientRect();
+      const center = rootRect.top + root.clientHeight / 2;
 
-        sections.forEach((section) => section.classList.toggle("section-active", section.id === id));
+      let bestSection = sections[0];
+      let bestDistance = Infinity;
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= center && rect.bottom >= center) {
+          bestSection = section;
+          break;
+        }
+
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - center);
+
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          bestSection = section;
+        }
+      }
+
+      if (!bestSection) return;
+
+      sections.forEach((section) => {
+        section.classList.toggle(
+          "section-active",
+          section === bestSection,
+        );
+      });
+
+      const id = bestSection.id;
+
+      setActiveSection((current) => {
+        if (current === id) return current;
 
         history.replaceState(null, "", `#${id}`);
-      },
-      {
-        root,
-        threshold: [0.2, 0.4, 0.6, 0.8],
-        rootMargin: "-15% 0px -15% 0px",
-      },
-    );
+        return id;
+      });
+    };
 
-    sections.forEach((section) => observer.observe(section));
+    const handleScroll = () => {
+      if (frame !== null) return;
+      frame = requestAnimationFrame(update);
+    };
 
-    return () => observer.disconnect();
+    root.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
+    update();
+
+    return () => {
+      root.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
   }, [containerRef, sectionIds]);
 
   return activeSection;

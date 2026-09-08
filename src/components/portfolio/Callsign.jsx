@@ -25,6 +25,8 @@ export default function Callsign() {
   const runRef = useRef(0);
   const audioRef = useRef(null);
 
+  const hasHover = () => window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
   const getAudioContext = async () => {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
 
@@ -130,15 +132,22 @@ export default function Callsign() {
   return (
     <div
       className="mt-3 inline-block font-mono text-xs"
-      onPointerEnter={play}
-      onPointerLeave={stop}
+      onPointerEnter={() => {
+        if (hasHover()) play();
+      }}
+      onPointerLeave={() => {
+        if (hasHover()) stop();
+      }}
     >
       <div className="flex min-h-5 items-center gap-3">
         <button
           type="button"
-          onFocus={play}
-          onBlur={stop}
-          onClick={play}
+          onClick={() => {
+            if (!hasHover()) {
+              if (playing) stop();
+              else play();
+            }
+          }}
           className="cursor-crosshair tracking-[0.2em] text-white/35 transition-colors hover:text-quantum-green focus:text-quantum-green focus:outline-none"
           aria-label="Amateur radio callsign VA3FMU"
         >

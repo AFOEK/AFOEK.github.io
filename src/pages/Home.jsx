@@ -20,12 +20,12 @@ export default function Home() {
   const activeSection = useSectionObserver(scrollRef, sectionIds);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-background text-foreground">
+    <div className="relative h-dvh overflow-hidden bg-background text-foreground">
       <BackgroundGlow />
       <Navbar />
       <SectionNavigator activeSection={activeSection} />
 
-      <main ref={scrollRef} className="portfolio-scroll relative z-10 h-screen overflow-y-auto">
+      <main ref={scrollRef} className="portfolio-scroll relative z-10 h-dvh overflow-y-auto">
         <Hero />
         <Research />
         <Publications />
