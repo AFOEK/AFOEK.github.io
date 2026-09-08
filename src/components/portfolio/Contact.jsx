@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa6";
 import { SiOrcid, SiGooglescholar } from "react-icons/si";
 import ContactCircuit from "@/components/portfolio/ContactCircuit";
 import PacmanTitle from "@/components/portfolio/PacmanTitle";
+import { playPacmanChomp } from "@/lib/pacmanAudio";
 
 const links = [
   {
@@ -41,6 +42,7 @@ export default function Contact() {
   const triggerPacman = useCallback(() => {
     if (eggRunning) return;
 
+    playPacmanChomp(1450);
     setEggRunning(true);
     setEggRun((current) => current + 1);
   }, [eggRunning]);
