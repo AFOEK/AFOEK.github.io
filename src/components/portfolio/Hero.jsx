@@ -1,3 +1,5 @@
+import Callsign from "@/components/portfolio/Callsign";
+
 export default function Hero() {
   return (
     <section id="home" className="page-section snap-start relative flex min-h-screen items-center pt-24">
@@ -12,8 +14,10 @@ export default function Hero() {
           </p>
 
           <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            Felix Montalfu
+            Felix "AFOEK" Montalfu
           </h1>
+
+          <Callsign />
 
           <h2 className="mt-5 max-w-3xl text-xl font-normal leading-relaxed text-white/70 sm:text-2xl">
             Researcher exploring quantum computing, artificial intelligence, and computational systems.

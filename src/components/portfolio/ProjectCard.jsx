@@ -19,33 +19,43 @@ const accents = {
 export default function ProjectCard({ project }) {
   const accent = accents[project.accent];
   return (
-    <article className={`group flex h-full flex-col border border-white/[0.07] bg-white/[0.015] p-7 transition-colors hover:bg-white/[0.025] ${accent.border}`}>
+    <a
+      href={project.github}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`View ${project.title} on GitHub`}
+      className={`group flex h-full flex-col border border-white/[0.07] bg-white/[0.015] p-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.025] ${accent.border}`}
+    >
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
             <p className={`font-mono text-xs uppercase tracking-[0.15em] ${accent.text}`}>{project.category}</p>
             {project.archived && <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/25">Archived</span>}
           </div>
+
           <h3 className="mt-3 text-xl font-medium tracking-tight text-white">{project.title}</h3>
           <p className="mt-1 text-sm text-white/35">{project.subtitle}</p>
         </div>
-        <FaGithub className="size-5 shrink-0 text-white/25" />
+
+        <FaGithub className="size-5 shrink-0 text-white/25 transition-colors group-hover:text-white/60" />
       </div>
 
       <p className="text-sm leading-6 text-white/50">{project.description}</p>
+
       <div className="mt-7 flex flex-wrap gap-2">
-        {project.stack.map((technology) => (
+        {project.stack?.map((technology) => (
           <span key={technology} className="rounded-md border border-white/[0.07] px-2.5 py-1 font-mono text-[11px] text-white/40">
             {technology}
           </span>
         ))}
       </div>
+
       <div className="mt-auto pt-8">
-        <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm text-white/45 transition-colors hover:text-white">
+        <span className="inline-flex items-center gap-2 text-sm text-white/45 transition-colors group-hover:text-white">
           View repository
-          <ArrowUpRight className="size-4" />
-        </a>
+          <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </span>
       </div>
-    </article>
+    </a>
   );
 }
