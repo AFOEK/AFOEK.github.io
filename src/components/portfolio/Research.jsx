@@ -1,4 +1,5 @@
 import { researchAreas } from "@/data/research";
+import ResearchCard from "@/components/portfolio/ResearchCard";
 
 export default function Research() {
   return (
@@ -11,12 +12,8 @@ export default function Research() {
         </div>
 
         <div className="grid border-y border-white/[0.07] md:grid-cols-3">
-          {researchAreas.map(({ title, description, icon: Icon, accent }) => (
-            <div key={title} className="group border-white/[0.07] p-8 transition-colors hover:bg-white/[0.025] md:border-r md:last:border-r-0">
-              <Icon className={`mb-8 size-6 ${accent}`} />
-              <h3 className="text-lg font-medium text-white">{title}</h3>
-              <p className="mt-4 text-sm leading-6 text-white/45">{description}</p>
-            </div>
+          {researchAreas.map((area) => (
+            <ResearchCard key={area.title} area={area} />
           ))}
         </div>
       </div>
