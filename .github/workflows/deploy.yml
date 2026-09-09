@@ -32,7 +32,7 @@ jobs:
       - name: Copy CV to public
         run: |
           mkdir -p public/cv
-          cp cv/main.pdf public/cv/Felix-Montalfu-CV.pdf
+          cp cv/cv.pdf public/cv/Felix-Montalfu-CV.pdf
 
       - name: Setup Node
         uses: actions/setup-node@v4
