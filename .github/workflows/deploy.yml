@@ -23,6 +23,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Compile CV
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: cv
+
+      - name: Copy CV to public
+        run: |
+          mkdir -p public/cv
+          cp cv/main.pdf public/cv/Felix-Montalfu-CV.pdf
+          
       - name: Setup Node
         uses: actions/setup-node@v4
         with:

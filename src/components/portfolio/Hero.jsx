@@ -35,6 +35,10 @@ export default function Hero() {
             <a href="/#publications" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
               Publications
             </a>
+
+            <a href="/cv/Felix-Montalfu-CV.pdf" target="_blank" rel="noreferrer" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
+              CV
+            </a>
           </div>
         </div>
       </div>
