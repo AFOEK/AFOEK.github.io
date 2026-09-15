@@ -7,9 +7,9 @@ const statusColor = {
   "In Progress": "text-quantum-green",
 };
 
-export default function PublicationItem({ publication }) {
+export default function PublicationItem({ publication, onEnter, onLeave }) {
   const content = (
-    <article className="group border-t border-white/[0.07] py-8">
+    <article className="group border-t border-white/[0.07] py-8" onPointerEnter={onEnter} onPointerLeave={onLeave} onFocus={onEnter} onBlur={onLeave}>
       <div className="grid gap-5 md:grid-cols-[120px_1fr_auto] md:gap-8">
         <div>
           <p className="font-mono text-xs text-white/35">{publication.year}</p>
