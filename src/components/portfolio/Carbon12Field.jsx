@@ -3,11 +3,47 @@ import { useEffect, useRef } from "react";
 const TAU = Math.PI * 2;
 
 const CARBONS = [
-    { x: 0.87, y: 0.48, scale: 2.65, opacity: 0.32, primary: true },
-    { x: 0.10, y: 0.17, scale: 0.42, opacity: 0.18 },
-    { x: 0.22, y: 0.76, scale: 0.68, opacity: 0.20 },
-    { x: 0.56, y: 0.14, scale: 0.54, opacity: 0.16 },
-    { x: 0.68, y: 0.82, scale: 0.47, opacity: 0.14 },
+    {
+        x: 0.17,
+        y: 0.56,
+        nucleusScale: 2.5,
+        cloudScale: 4.6,
+        opacity: 0.95,
+        samples: 2200,
+        primary: true,
+    },
+    {
+        x: 0.80,
+        y: 0.18,
+        nucleusScale: 0.6,
+        cloudScale: 1.35,
+        opacity: 0.25,
+        samples: 240,
+    },
+    {
+        x: 0.76,
+        y: 0.74,
+        nucleusScale: 0.72,
+        cloudScale: 1.55,
+        opacity: 0.24,
+        samples: 200,
+    },
+    {
+        x: 0.48,
+        y: 0.16,
+        nucleusScale: 0.55,
+        cloudScale: 1.25,
+        opacity: 0.20,
+        samples: 210,
+    },
+    {
+        x: 0.68,
+        y: 0.84,
+        nucleusScale: 0.48,
+        cloudScale: 1.05,
+        opacity: 0.17,
+        samples: 180,
+    },
 ];
 
 export const ORBITALS = [
@@ -72,7 +108,7 @@ function makeElectron(index) {
         speed: rand(1.8, 5.5),
         radius: rand(18, 72),
         eccentricity: rand(0.35, 1),
-        size: rand(0.55, 1.8),
+        size: Math.random() < 0.04 ? rand(1.2, 1.8) : rand(0.3, 0.9),
         alpha: rand(0.12, 0.58),
         shell: index % 6,
     };
@@ -86,7 +122,7 @@ export default function Carbon12Field({ activePublication = null }) {
     const canvasRef = useRef(null);
     const activeRef = useRef(activePublication);
     const stateRef = useRef({
-        electrons: Array.from({ length: 420 }, (_, i) => makeElectron(i)),
+        electrons: Array.from({ length: 2400 }, (_, i) => makeElectron(i)),
         densityFrom: [],
         densityTo: [],
         orbital: null,
@@ -171,16 +207,7 @@ export default function Carbon12Field({ activePublication = null }) {
                 const px = cx + (x + vibrationX) * scale;
                 const py = cy + (y + vibrationY) * scale;
                 const radius = 5.2 * scale;
-
-                const gradient = ctx.createRadialGradient(
-                    px - radius * 0.3,
-                    py - radius * 0.3,
-                    0,
-                    px,
-                    py,
-                    radius,
-                );
-
+                const gradient = ctx.createRadialGradient(px - radius * 0.3, py - radius * 0.3, 0, px, py, radius,);
                 if (proton) {
                     gradient.addColorStop(0, `rgba(154,140,194,${opacity * 1.8})`);
                     gradient.addColorStop(1, `rgba(96,79,136,${opacity})`);
@@ -206,12 +233,9 @@ export default function Carbon12Field({ activePublication = null }) {
         const render = (time) => {
             const dt = Math.min((time - last) / 1000, 0.05);
             last = time;
-
             ctx.clearRect(0, 0, width, height);
-
             const state = stateRef.current;
             const frozen = activeRef.current !== null;
-
             const target = frozen ? 1 : 0;
             state.transition += (target - state.transition) * Math.min(dt * 2.5, 1);
 
@@ -225,17 +249,26 @@ export default function Carbon12Field({ activePublication = null }) {
             CARBONS.forEach((carbon, carbonIndex) => {
                 const cx = width * carbon.x;
                 const cy = height * carbon.y;
-                const scale = carbon.scale;
+
+                const nucleusScale = carbon.nucleusScale;
+                const cloudScale = carbon.cloudScale;
                 const baseOpacity = carbon.opacity;
 
-                const isPrimary = carbon.primary;
-                const cloudCount = isPrimary ? state.electrons.length : 90;
+                const isPrimary = carbon.primary === true;
+
+                const cloudCount = Math.min(
+                    carbon.samples ?? 120,
+                    state.electrons.length,
+                );
 
                 for (let i = 0; i < cloudCount; i++) {
                     const electron = state.electrons[i % state.electrons.length];
 
                     const wobble =
-                        Math.sin(time * 0.001 * electron.speed + electron.seed) * 8;
+                        Math.sin(
+                            time * 0.001 * electron.speed +
+                            electron.seed,
+                        ) * 8;
 
                     const angle =
                         electron.phase +
@@ -243,22 +276,27 @@ export default function Carbon12Field({ activePublication = null }) {
                         carbonIndex * 0.7;
 
                     const radius = electron.radius + wobble;
-                    const noiseX = Math.sin(time * 0.008 + electron.seed * 7.1) * 7 + Math.sin(time * 0.013 + electron.seed * 2.3) * 3;
 
-                    const noiseY = Math.cos(time * 0.009 + electron.seed * 5.7) * 7 + Math.cos(time * 0.015 + electron.seed * 3.9) * 3;
+                    const noiseX =
+                        Math.sin(time * 0.008 + electron.seed * 7.1) * 7 +
+                        Math.sin(time * 0.013 + electron.seed * 2.3) * 3;
+
+                    const noiseY =
+                        Math.cos(time * 0.009 + electron.seed * 5.7) * 7 +
+                        Math.cos(time * 0.015 + electron.seed * 3.9) * 3;
 
                     const movingX =
                         Math.cos(angle) *
                         radius *
                         electron.eccentricity *
-                        scale +
-                        noiseX * scale;
+                        cloudScale +
+                        noiseX * cloudScale;
 
                     const movingY =
                         Math.sin(angle * 1.13) *
                         radius *
-                        scale +
-                        noiseY * scale;
+                        cloudScale +
+                        noiseY * cloudScale;
 
                     let targetX = movingX;
                     let targetY = movingY;
@@ -269,15 +307,25 @@ export default function Carbon12Field({ activePublication = null }) {
                         state.densityTo.length
                     ) {
                         const from =
-                            state.densityFrom[i % state.densityFrom.length];
+                            state.densityFrom[
+                            i % state.densityFrom.length
+                            ];
 
                         const to =
-                            state.densityTo[i % state.densityTo.length];
+                            state.densityTo[
+                            i % state.densityTo.length
+                            ];
 
-                        const orbitalT = smoothstep(state.orbitalTransition);
+                        const orbitalT =
+                            smoothstep(state.orbitalTransition);
 
-                        targetX = lerp(from.x, to.x, orbitalT) * scale;
-                        targetY = lerp(from.y, to.y, orbitalT) * scale;
+                        targetX =
+                            lerp(from.x, to.x, orbitalT) *
+                            cloudScale;
+
+                        targetY =
+                            lerp(from.y, to.y, orbitalT) *
+                            cloudScale;
 
                         if (!isPrimary) {
                             targetX *= 0.65;
@@ -298,17 +346,28 @@ export default function Carbon12Field({ activePublication = null }) {
                     const alpha =
                         electron.alpha *
                         baseOpacity *
-                        (isPrimary ? 1.35 : 0.7);
+                        (isPrimary ? 0.8 : 0.55);
+
+                    const electronScale = Math.max(
+                        0.6,
+                        Math.min(1.5, cloudScale * 0.35),
+                    );
 
                     drawElectron(
                         x,
                         y,
-                        electron.size * Math.max(0.7, scale * 0.55),
+                        electron.size * electronScale,
                         alpha,
                     );
                 }
 
-                drawNucleus(cx, cy, scale, baseOpacity, time);
+                drawNucleus(
+                    cx,
+                    cy,
+                    nucleusScale,
+                    baseOpacity,
+                    time,
+                );
             });
 
             frame = requestAnimationFrame(render);
