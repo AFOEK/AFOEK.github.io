@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { publications } from "@/data/publications";
+import { ORBITALS } from "@/data/orbitals";
 import PublicationItem from "@/components/portfolio/PublicationItem";
-import Carbon12Field, {
-  ORBITALS,
-} from "@/components/portfolio/Carbon12Field";
+import Carbon12Field from "@/components/portfolio/Carbon12Field";
 
 export default function Publications() {
   const [hoveredPublication, setHoveredPublication] = useState(null);
@@ -19,12 +18,12 @@ export default function Publications() {
       className="page-section snap-start relative overflow-hidden py-28 sm:py-36"
     >
       <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-80"
+        className="pointer-events-none absolute inset-0 z-0 opacity-100"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 30%, black 58%)",
+            "linear-gradient(to right, black 0%, black 38%, rgba(0,0,0,0.75) 58%, rgba(0,0,0,0.25) 82%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 30%, black 58%)",
+            "linear-gradient(to right, black 0%, black 38%, rgba(0,0,0,0.75) 58%, rgba(0,0,0,0.25) 82%, transparent 100%)",
         }}
       >
         <Carbon12Field activePublication={hoveredPublication} />
@@ -33,8 +32,8 @@ export default function Publications() {
       {activeOrbital && (
         <div
           className={`pointer-events-none absolute bottom-8 right-8 z-[5] font-mono text-[9px] tracking-[0.22em] transition-all duration-500 ${activeOrbital
-              ? "translate-y-0 opacity-100 text-quantum-violet/30"
-              : "translate-y-1 opacity-0 text-white/0"
+            ? "translate-y-0 opacity-100 text-quantum-violet/30"
+            : "translate-y-1 opacity-0 text-white/0"
             }`}
         >
           ψ : {activeOrbital?.label ?? "—"}
