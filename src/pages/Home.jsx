@@ -11,10 +11,11 @@ import Research from "@/components/portfolio/Research";
 import Publications from "@/components/portfolio/Publications";
 import Projects from "@/components/portfolio/Projects";
 import Contact from "@/components/portfolio/Contact";
+import Achievements from "@/components/portfolio/Achievements";
 
 import { useSectionObserver } from "@/hooks/useSectionObserver";
 
-const sectionIds = ["home", "research", "publications", "projects", "contact"];
+const sectionIds = ["home", "research", "publications", "achievements", "projects", "contact"];
 
 export default function Home() {
   const scrollRef = useRef(null);
@@ -31,6 +32,7 @@ export default function Home() {
         <Hero />
         <Research />
         <Publications />
+        <Achievements />
         <Projects />
         <Contact />
         <Footer />
