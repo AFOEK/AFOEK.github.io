@@ -15,7 +15,7 @@ export const publications = [
     type: "Conference Paper",
     status: "Presented",
     description: "Introduces a hybrid recurrent architecture where LSTM gates are replaced with compact variational quantum circuits. The model evaluates multi-horizon forecasting of Toronto Stock Exchange returns and compares the hybrid approach with classical LSTM baselines.",
-    href: null,
+    href: "https://link.springer.com/book/9783032464453",
   },
   {
     title: "A Hybrid CNN–Quantum Neural Network Framework for Web Application Firewall Intrusion Detection",
@@ -24,7 +24,7 @@ export const publications = [
     type: "Conference Paper",
     status: "Presented",
     description: "Explores multimodal Web Application Firewall intrusion detection using classical CNN feature extraction, quantum recurrent processing, and variational quantum classification across HTTP payload and network-flow features.",
-    href: null,
+    href: "https://link.springer.com/book/9783032464453",
   },
   {
     title: "A Hybrid Quantum Convolutional Neural Network for JWST NIRCam Image Classification",
