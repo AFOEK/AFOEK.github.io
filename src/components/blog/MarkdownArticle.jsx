@@ -1,5 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
 
 export default function MarkdownArticle({
   children,
@@ -7,6 +9,7 @@ export default function MarkdownArticle({
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw, rehypeSanitize]}
       components={{
         h1: ({ children }) => (
           <h1 className="mb-8 mt-12 text-4xl font-semibold tracking-tight text-white">

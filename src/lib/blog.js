@@ -15,9 +15,7 @@ function parsePost(source, path) {
   );
 
   if (!match) {
-    throw new Error(
-      `Missing front matter in ${path}`,
-    );
+    throw new Error(`Missing front matter in ${path}`);
   }
 
   const metadata = parse(match[1]);
@@ -35,25 +33,23 @@ function parsePost(source, path) {
   };
 }
 
-export const posts = Object.entries(files)
-  .map(([path, source]) =>
-    parsePost(source, path),
-  )
+function dateValue(date) {
+  if (!date) return 0;
+
+  const timestamp = new Date(date).getTime();
+
+  return Number.isFinite(timestamp) ? timestamp : 0;
+}
+
+const allPosts = Object.entries(files)
+  .map(([path, source]) => parsePost(source, path))
   .filter((post) => post.draft !== true)
-  .sort((a, b) => {
-    const aDate = a.date
-      ? new Date(a.date).getTime()
-      : 0;
+  .sort((a, b) => dateValue(b.date) - dateValue(a.date));
 
-    const bDate = b.date
-      ? new Date(b.date).getTime()
-      : 0;
-
-    return bDate - aDate;
-  });
+export const posts = allPosts.filter(
+  (post) => post.hidden !== true,
+);
 
 export function getPost(slug) {
-  return posts.find(
-    (post) => post.slug === slug,
-  );
+  return allPosts.find((post) => post.slug === slug) ?? null;
 }
