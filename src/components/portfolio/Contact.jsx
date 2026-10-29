@@ -57,7 +57,7 @@ export default function Contact() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-blue">
-            04 / Contact
+            05 / Contact
           </p>
 
           <PacmanTitle trigger={eggRun}  onComplete={finishPacman} />

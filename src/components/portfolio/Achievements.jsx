@@ -15,17 +15,17 @@ import {
 const accents = {
   blue: {
     text: "text-quantum-blue",
-    border: "group-hover:border-quantum-blue/30",
+    border: "group-hover:border-quantum-blue/40",
   },
 
   violet: {
     text: "text-quantum-violet",
-    border: "group-hover:border-quantum-violet/30",
+    border: "group-hover:border-quantum-violet/40",
   },
 
   green: {
     text: "text-quantum-green",
-    border: "group-hover:border-quantum-green/30",
+    border: "group-hover:border-quantum-green/40",
   },
 };
 
@@ -39,29 +39,35 @@ function AchievementRow({
   const content = (
     <article
       className={`
-        group grid gap-5 border-b border-white/[0.07]
-        py-7 transition-colors last:border-b-0
+        group grid gap-5 border-b border-white/[0.08]
+        py-8 transition-colors last:border-b-0
         md:grid-cols-[150px_1fr_auto]
         ${accent.border}
       `}
     >
+      {/* Date + category */}
       <div>
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/25">
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
           {item.issued}
         </p>
 
         <p
-          className={`mt-2 font-mono text-[10px] uppercase tracking-[0.16em] ${accent.text}`}
+          className={`
+            mt-2 font-mono text-[10px] uppercase
+            tracking-[0.16em] opacity-90
+            ${accent.text}
+          `}
         >
           {item.category}
         </p>
       </div>
 
+      {/* Main content */}
       <div>
         <div className="flex items-start gap-3">
           <Icon
             className={`mt-0.5 size-4 shrink-0 ${accent.text}`}
-            strokeWidth={1.5}
+            strokeWidth={1.7}
           />
 
           <div>
@@ -69,13 +75,13 @@ function AchievementRow({
               {item.name}
             </h3>
 
-            <p className="mt-2 text-sm text-white/45">
+            <p className="mt-2 text-sm text-white/60">
               {item.issuer}
 
               {item.sponsor && (
                 <>
                   {" "}
-                  <span className="text-white/20">
+                  <span className="text-white/35">
                     ·
                   </span>{" "}
                   Sponsored by {item.sponsor}
@@ -89,7 +95,7 @@ function AchievementRow({
           item.date ||
           item.location ||
           item.result) && (
-          <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.12em] text-white/25">
+          <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.12em] text-white/40">
             {item.result && (
               <span>{item.result}</span>
             )}
@@ -107,16 +113,17 @@ function AchievementRow({
         )}
 
         {item.credentialId && (
-          <p className="mt-4 max-w-xl break-all font-mono text-[9px] leading-4 text-white/20">
+          <p className="mt-4 max-w-xl break-all font-mono text-[9px] leading-4 text-white/35">
             Credential ID:{" "}
             {item.credentialId}
           </p>
         )}
       </div>
 
+      {/* Link */}
       <div className="flex items-start justify-end">
         {item.href && (
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs text-white/30 transition-colors group-hover:text-white/70">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs text-white/50 transition-colors group-hover:text-white">
             View
             <ArrowUpRight className="size-3" />
           </span>
@@ -147,18 +154,18 @@ function GroupHeader({
   description,
 }) {
   return (
-    <div className="mb-5 flex items-start gap-3">
+    <div className="mb-6 flex items-start gap-3">
       <Icon
-        className="mt-0.5 size-4 text-white/25"
-        strokeWidth={1.5}
+        className="mt-0.5 size-4 text-white/55"
+        strokeWidth={1.7}
       />
 
       <div>
-        <h3 className="font-mono text-xs uppercase tracking-[0.18em] text-white/55">
+        <h3 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-white/80">
           {title}
         </h3>
 
-        <p className="mt-1 text-xs text-white/25">
+        <p className="mt-2 text-sm text-white/45">
           {description}
         </p>
       </div>
@@ -182,7 +189,7 @@ export default function Achievements() {
             Achievements & credentials
           </h2>
 
-          <p className="mt-5 leading-7 text-white/50">
+          <p className="mt-5 leading-7 text-white/55">
             Selected hackathons, technical credentials,
             courses, and training completed across quantum
             computing, computing systems, and related areas.
@@ -191,7 +198,6 @@ export default function Achievements() {
 
         <div className="space-y-16">
           {/* Hackathons */}
-
           <div>
             <GroupHeader
               icon={Trophy}
@@ -199,7 +205,7 @@ export default function Achievements() {
               description="Hackathon participation, project submissions, and competition credentials."
             />
 
-            <div className="border-y border-white/[0.07]">
+            <div className="border-y border-white/[0.08]">
               {hackathons.map((item) => (
                 <AchievementRow
                   key={item.name}
@@ -211,7 +217,6 @@ export default function Achievements() {
           </div>
 
           {/* Badges */}
-
           <div>
             <GroupHeader
               icon={Medal}
@@ -219,7 +224,7 @@ export default function Achievements() {
               description="Verified technical achievements and issued credentials."
             />
 
-            <div className="border-y border-white/[0.07]">
+            <div className="border-y border-white/[0.08]">
               {badges.map((item) => (
                 <AchievementRow
                   key={item.name}
@@ -231,7 +236,6 @@ export default function Achievements() {
           </div>
 
           {/* Courses */}
-
           <div>
             <GroupHeader
               icon={BookOpen}
@@ -239,7 +243,7 @@ export default function Achievements() {
               description="Selected structured courses and technical training programs."
             />
 
-            <div className="border-y border-white/[0.07]">
+            <div className="border-y border-white/[0.08]">
               {courses.map((item) => (
                 <AchievementRow
                   key={item.name}

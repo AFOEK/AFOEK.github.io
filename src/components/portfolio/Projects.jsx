@@ -1,14 +1,18 @@
 import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import ProjectCard from "@/components/portfolio/ProjectCard";
+import MeteorShower from "@/components/portfolio/MeteorShower";
 
 export default function Projects() {
   return (
-    <section id="projects" className="page-section snap-start py-28 sm:py-36">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section id="projects" className="page-section snap-start relative overflow-hidden py-28 sm:py-36">
+      <div className="absolute inset-0 z-0 opacity-70">
+        <MeteorShower />
+      </div>
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-16 flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-green">03 / Projects</p>
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-quantum-green">04 / Projects</p>
             <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Starred projects</h2>
             <p className="mt-5 leading-7 text-white/50">Selected software and experimental systems spanning artificial intelligence, systems programming, and quantum computing.</p>
           </div>

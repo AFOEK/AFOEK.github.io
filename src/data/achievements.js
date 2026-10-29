@@ -15,7 +15,7 @@ export const hackathons = [
     name: "Certificate of Project Submission to QCHack 2021",
     issuer: "Quantum Coalition",
     issued: "Apr 2021",
-    href: "https://drive.google.com/drive/folders/1MaZuM-gVkqfg-Bw9CHznryKWufcSMH09",
+    href: "https://drive.google.com/file/d/1OUg4LqWrvJJYWJJePMrQiJwsn_kqKEAk/view?usp=sharing",
     credentialId: "58ac1c29-21d1-45b7-bea6-569913fdb1af",
     category: "Hackathon",
     accent: "violet",
