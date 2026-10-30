@@ -1,7 +1,7 @@
 ---
 title: "Master Degree Study and Coping"
 slug: "master-degree-study-and-coping"
-date: "Jan 28, 2025"
+date: "2025-01-28" 
 description: "Reflections on graduate study, adapting to a master's program, and coping with the challenges that come with it."
 tags:
   - graduate school

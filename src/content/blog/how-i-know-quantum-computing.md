@@ -1,7 +1,7 @@
 ---
 title: "How I Know Quantum Computing"
 slug: "how-i-know-quantum-computing"
-date: "May 31, 2021"
+date: "2021-05-31"
 description: "My journey into quantum computing and the experiences that led me to explore the field."
 tags:
   - quantum computing

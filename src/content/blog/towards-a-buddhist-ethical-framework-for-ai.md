@@ -1,7 +1,7 @@
 ---
 title: "Towards A Buddhist Ethical Framework for AI"
 slug: "towards-a-buddhist-ethical-framework-for-ai"
-date: "Dec 20, 2026"
+date: "2026-12-20"
 description: "lorem ipsum"
 tags:
   - research
