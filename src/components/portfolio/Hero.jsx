@@ -1,51 +1,72 @@
 import Callsign from "@/components/portfolio/Callsign";
+import { lazy, Suspense, useState } from "react";
+
+const NameCard3D = lazy(
+  () => import("@/components/NameCard3D")
+);
 
 export default function Hero() {
+  const [showNameCard, setShowNameCard] = useState(false);
   return (
-    <section id="home" className="page-section snap-start relative flex min-h-dvh items-center pt-28 sm:pt-24">
-      <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-quantum-blue/5 blur-3xl" />
-      <div className="absolute right-[12%] top-[28%] h-80 w-80 rounded-full bg-quantum-violet/5 blur-3xl" />
-      <div className="absolute bottom-[12%] left-[45%] h-64 w-64 rounded-full bg-quantum-green/5 blur-3xl" />
+    <>
+      <section id="home" className="page-section snap-start relative flex min-h-dvh items-center pt-28 sm:pt-24">
+        <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-quantum-blue/5 blur-3xl" />
+        <div className="absolute right-[12%] top-[28%] h-80 w-80 rounded-full bg-quantum-violet/5 blur-3xl" />
+        <div className="absolute bottom-[12%] left-[45%] h-64 w-64 rounded-full bg-quantum-green/5 blur-3xl" />
+        <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
+          <div className="max-w-4xl">
+            <p className="mb-6 font-mono text-sm tracking-[0.2em] text-quantum-blue">
+              COMPUTER SCIENCE · QUANTUM COMPUTING · AI
+            </p>
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-4xl">
-          <p className="mb-6 font-mono text-sm tracking-[0.2em] text-quantum-blue">
-            COMPUTER SCIENCE · QUANTUM COMPUTING · AI
-          </p>
+            <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              <button type="button" onClick={() => setShowNameCard(true)} aria-label="Open my interactive 3D business card" className="cursor-pointer font-[inherit] text-left transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-quantum-blue">
+                Felix "AFOEK" Montalfu
+              </button>
+            </h1>
 
-          <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            Felix "AFOEK" Montalfu
-          </h1>
+            <Callsign />
 
-          <Callsign />
+            <h2 className="mt-5 max-w-3xl text-xl font-normal leading-relaxed text-white/70 sm:text-2xl">
+              Researcher exploring quantum computing, artificial intelligence, and computational systems.
+            </h2>
 
-          <h2 className="mt-5 max-w-3xl text-xl font-normal leading-relaxed text-white/70 sm:text-2xl">
-            Researcher exploring quantum computing, artificial intelligence, and computational systems.
-          </h2>
+            <p className="mt-8 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+              Master&apos;s student in Computer Science at Algoma University, working on hybrid quantum-classical machine learning, quantum algorithms, cybersecurity, and systems-oriented research.
+            </p>
 
-          <p className="mt-8 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-            Master&apos;s student in Computer Science at Algoma University, working on hybrid quantum-classical machine learning, quantum algorithms, cybersecurity, and systems-oriented research.
-          </p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a href="/#research" className="rounded-lg bg-quantum-blue px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90">
+                Explore Research
+              </a>
 
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a href="/#research" className="rounded-lg bg-quantum-blue px-5 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90">
-              Explore Research
-            </a>
+              <a href="/#publications" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
+                Publications
+              </a>
 
-            <a href="/#publications" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
-              Publications
-            </a>
+              <a href="/#blog" className="inline-flex items-center justify-center rounded-xl border border-white/10 px-6 py-4 text-sm font-medium text-white/70 transition-all duration-300 hover:border-quantum-violet/50 hover:bg-quantum-violet/10 hover:text-white">
+                Writing
+              </a>
 
-            <a href="/#blog" className="inline-flex items-center justify-center rounded-xl border border-white/10 px-6 py-4 text-sm font-medium text-white/70 transition-all duration-300 hover:border-quantum-violet/50 hover:bg-quantum-violet/10 hover:text-white">
-              Writing
-            </a>
-
-            <a href="/cv/Felix-Montalfu-CV.pdf" target="_blank" rel="noreferrer" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
-              CV
-            </a>
+              <a href="/cv/Felix-Montalfu-CV.pdf" target="_blank" rel="noreferrer" className="rounded-lg border border-white/10 px-5 py-3 text-sm font-medium text-white/70 transition-colors hover:border-white/20 hover:text-white">
+                CV
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {showNameCard && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-[200] grid place-items-center bg-black/80 text-white">
+              Loading 3D business card...
+            </div>
+          }>
+          <NameCard3D
+            onClose={() => setShowNameCard(false)}
+          />
+        </Suspense>
+      )}
+    </>
   );
 }
