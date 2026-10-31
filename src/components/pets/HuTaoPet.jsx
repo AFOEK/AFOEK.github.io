@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 const FRAME_WIDTH = 192;
@@ -8,18 +7,20 @@ const SHEET_WIDTH = 1536;
 const SHEET_HEIGHT = 1872;
 
 const RUN_RIGHT_ROW = 1;
+const RUN_LEFT_ROW = 2;
 const FRAME_COUNT = 8;
 
 const SCALE = 0.5;
 const FPS = 10;
-const RUN_DURATION = 12;
+const RUN_DURATION = 10;
 
-export default function HuTaoPet() {
+export default function HuTaoPet({ facing = "right" }) {
   const [frame, setFrame] = useState(0);
+  const activeRow = facing === "right" ? RUN_RIGHT_ROW : RUN_LEFT_ROW;
 
   useEffect(() => {
     const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (reducedMotion) return;
@@ -37,39 +38,17 @@ export default function HuTaoPet() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-20"
-    >
-      <div
-        className="hutao-runner absolute bottom-0"
-        style={{
-          "--hutao-width": `${width}px`,
-          "--hutao-duration": `${RUN_DURATION}s`,
-        }}
-      >
-        <div
-          className="select-none"
-          style={{
-            width,
-            height,
-
-            backgroundImage:
-              'url("/pets/hutao/spritesheet.webp")',
-
-            backgroundRepeat: "no-repeat",
-
-            backgroundSize:
-              `${SHEET_WIDTH * SCALE}px ${SHEET_HEIGHT * SCALE}px`,
-
-            backgroundPosition:
-              `${-frame * width}px ${-RUN_RIGHT_ROW * height}px`,
-
-            imageRendering: "pixelated",
-
-            filter:
-              "drop-shadow(0 5px 8px rgba(255,110,160,0.16))",
-          }}
-        />
-      </div>
-    </div>
+      className="pointer-events-none shrink-0 select-none"
+      style={{
+        width,
+        height,
+        backgroundImage: 'url("/pets/hutao/spritesheet.webp")',
+        backgroundRepeat: "no-repeat",
+        backgroundSize: `${SHEET_WIDTH * SCALE}px ${SHEET_HEIGHT * SCALE}px`,
+        backgroundPosition: `${-frame * width}px ${-activeRow * height}px`,
+        imageRendering: "pixelated",
+        filter: "drop-shadow(0 5px 8px rgba(255,110,160,0.16))",
+      }}
+    />
   );
 }

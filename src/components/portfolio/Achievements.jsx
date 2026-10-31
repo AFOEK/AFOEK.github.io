@@ -1,6 +1,6 @@
 import { ArrowUpRight, Award, BookOpen, Medal, Trophy } from "lucide-react";
 import { badges, hackathons, courses } from "@/data/achievements";
-import HuTaoPet from "@/components/pets/HuTaoPet";
+import HuTaoRunner from "@/components/pets/HuTaoRunner";
 
 const accents = {
   blue: {
@@ -135,7 +135,7 @@ function GroupHeader({ icon: Icon, title, description, runner = false }) {
 
           {runner && (
             <div className="relative h-5 min-w-[120px] flex-1">
-              <HuTaoPet />
+              <HuTaoRunner />
             </div>
           )}
         </div>

@@ -248,25 +248,25 @@
   }
 }
 
-@keyframes hutao-run-across {
+@keyframes hutao-patrol {
   from {
-    left: 0;
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    left: 100%;
+    transform: translate3d(var(--hutao-travel), 0, 0);
   }
 }
 
-.hutao-runner {
-  animation: hutao-run-across var(--hutao-duration) linear infinite;
-  will-change: left;
+.hutao-patrol {
+  animation: hutao-patrol var(--hutao-duration) linear infinite alternate;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hutao-runner {
+  .hutao-patrol {
     animation: none;
-    left: 0;
+    transform: none;
   }
 }
 
