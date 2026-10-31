@@ -248,6 +248,28 @@
   }
 }
 
+@keyframes hutao-run-across {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.hutao-runner {
+  animation: hutao-run-across var(--hutao-duration) linear infinite;
+  will-change: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hutao-runner {
+    animation: none;
+    left: 0;
+  }
+}
+
 .pacman-run {
   position: absolute;
   top: 50%;

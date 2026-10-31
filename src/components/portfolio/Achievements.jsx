@@ -1,16 +1,6 @@
-import {
-  ArrowUpRight,
-  Award,
-  BookOpen,
-  Medal,
-  Trophy,
-} from "lucide-react";
-
-import {
-  badges,
-  hackathons,
-  courses,
-} from "@/data/achievements";
+import { ArrowUpRight, Award, BookOpen, Medal, Trophy } from "lucide-react";
+import { badges, hackathons, courses } from "@/data/achievements";
+import HuTaoPet from "@/components/pets/HuTaoPet";
 
 const accents = {
   blue: {
@@ -29,12 +19,8 @@ const accents = {
   },
 };
 
-function AchievementRow({
-  item,
-  icon: Icon,
-}) {
-  const accent =
-    accents[item.accent] ?? accents.blue;
+function AchievementRow({ item, icon: Icon }) {
+  const accent = accents[item.accent] ?? accents.blue;
 
   const content = (
     <article
@@ -81,41 +67,29 @@ function AchievementRow({
               {item.sponsor && (
                 <>
                   {" "}
-                  <span className="text-white/35">
-                    ·
-                  </span>{" "}
-                  Sponsored by {item.sponsor}
+                  <span className="text-white/35">·</span> Sponsored by{" "}
+                  {item.sponsor}
                 </>
               )}
             </p>
           </div>
         </div>
 
-        {(item.period ||
-          item.date ||
-          item.location ||
-          item.result) && (
+        {(item.period || item.date || item.location || item.result) && (
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.12em] text-white/40">
-            {item.result && (
-              <span>{item.result}</span>
-            )}
+            {item.result && <span>{item.result}</span>}
 
             {(item.period || item.date) && (
-              <span>
-                {item.period ?? item.date}
-              </span>
+              <span>{item.period ?? item.date}</span>
             )}
 
-            {item.location && (
-              <span>{item.location}</span>
-            )}
+            {item.location && <span>{item.location}</span>}
           </div>
         )}
 
         {item.credentialId && (
           <p className="mt-4 max-w-xl break-all font-mono text-[9px] leading-4 text-white/35">
-            Credential ID:{" "}
-            {item.credentialId}
+            Credential ID: {item.credentialId}
           </p>
         )}
       </div>
@@ -137,37 +111,34 @@ function AchievementRow({
   }
 
   return (
-    <a
-      href={item.href}
-      target="_blank"
-      rel="noreferrer"
-      className="block"
-    >
+    <a href={item.href} target="_blank" rel="noreferrer" className="block">
       {content}
     </a>
   );
 }
 
-function GroupHeader({
-  icon: Icon,
-  title,
-  description,
-}) {
+function GroupHeader({ icon: Icon, title, description, runner = false }) {
   return (
     <div className="mb-6 flex items-start gap-3">
       <Icon
-        className="mt-0.5 size-4 text-white/55"
+        className="mt-0.5 size-4 shrink-0 text-white/55"
         strokeWidth={1.7}
       />
 
-      <div>
+      <div className="min-w-0 flex-1">
         <h3 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-white/80">
           {title}
         </h3>
 
-        <p className="mt-2 text-sm text-white/45">
-          {description}
-        </p>
+        <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-3">
+          <p className="max-w-full text-sm text-white/45">{description}</p>
+
+          {runner && (
+            <div className="relative h-5 min-w-[120px] flex-1">
+              <HuTaoPet />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -190,9 +161,9 @@ export default function Achievements() {
           </h2>
 
           <p className="mt-5 leading-7 text-white/55">
-            Selected hackathons, technical credentials,
-            courses, and training completed across quantum
-            computing, computing systems, and related areas.
+            Selected hackathons, technical credentials, courses, and training
+            completed across quantum computing, computing systems, and related
+            areas.
           </p>
         </div>
 
@@ -203,15 +174,11 @@ export default function Achievements() {
               icon={Trophy}
               title="Hackathons"
               description="Hackathon participation, project submissions, and competition credentials."
+              runner
             />
-
-            <div className="border-y border-white/[0.08]">
+            <div className="relative border-y border-white/[0.08]">
               {hackathons.map((item) => (
-                <AchievementRow
-                  key={item.name}
-                  item={item}
-                  icon={Trophy}
-                />
+                <AchievementRow key={item.name} item={item} icon={Trophy} />
               ))}
             </div>
           </div>
@@ -226,11 +193,7 @@ export default function Achievements() {
 
             <div className="border-y border-white/[0.08]">
               {badges.map((item) => (
-                <AchievementRow
-                  key={item.name}
-                  item={item}
-                  icon={Award}
-                />
+                <AchievementRow key={item.name} item={item} icon={Award} />
               ))}
             </div>
           </div>
@@ -245,11 +208,7 @@ export default function Achievements() {
 
             <div className="border-y border-white/[0.08]">
               {courses.map((item) => (
-                <AchievementRow
-                  key={item.name}
-                  item={item}
-                  icon={BookOpen}
-                />
+                <AchievementRow key={item.name} item={item} icon={BookOpen} />
               ))}
             </div>
           </div>
