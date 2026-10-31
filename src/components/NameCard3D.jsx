@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, RoundedBox, useTexture } from "@react-three/drei";
 import { AdditiveBlending, DoubleSide, MathUtils, SRGBColorSpace } from "three";
 import { X, RotateCcw } from "lucide-react";
@@ -69,6 +69,8 @@ function CardModel({ flipped }) {
 
     const front = useTexture("/namecard/front.png");
     const back = useTexture("/namecard/back.png");
+    const viewport = useThree((state) => state.viewport);
+    const cardScale = Math.min(1, viewport.width / 4.5, viewport.height / 2.8,);
 
     useEffect(() => {
         front.colorSpace = SRGBColorSpace;
@@ -112,7 +114,7 @@ function CardModel({ flipped }) {
     });
 
     return (
-        <group ref={group}>
+        <group ref={group} scale={cardScale}>
             {/* holographic glow behind the card */}
             {/* <CardAura /> */}
 
@@ -189,8 +191,8 @@ export default function NameCard3D({ onClose }) {
     }, [onClose]);
 
     return (
-        <div className=" fixed inset-0 z-[200] flex items-center justify-center bg-black/75 backdrop-blur-md p-4" onClick={onClose}>
-            <section role="dialog" aria-modal="true" aria-label="Interactive 3D business card" onClick={(e) => e.stopPropagation()} className="relative w-full max-w-4xl rounded-2xl border border-white/10 bg-[#0b0e16]/95 p-5 sm:p-8 shadow-2xl">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/75 backdrop-blur-md p-2 sm:p-6" onClick={onClose}>
+            <section role="dialog" aria-modal="true" aria-label="Interactive 3D business card" onClick={(e) => e.stopPropagation()} className="relative w-full max-w-4xl max-h-[calc(100dvh-1rem)] overflow-y-auto rounded-2xl border border-white/10 bg-[#0b0e16]/95 p-3 shadow-2xl sm:p-8">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
@@ -210,7 +212,7 @@ export default function NameCard3D({ onClose }) {
 
                 {/* 3D Canvas */}
 
-                <div className="mt-4 h-[min(55vh,520px)] w-full">
+                <div className="mt-3 h-[min(42dvh,300px)] w-full sm:mt-4 sm:h-[min(55dvh,520px)]">
                     <Canvas
                         camera={{ position: [0, 0, 5.4], fov: 35 }}
                         dpr={[1, 1.75]}
